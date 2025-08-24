@@ -10,7 +10,7 @@ var http = require('http');
 
 
 const Database = require('../db/Database');
-const{CONNECTION_STRING} = require('../config');
+const{ CONNECTION_STRING } = require('../config');
 
 /**
  * Get port from environment and store in Express.
@@ -93,5 +93,5 @@ function onListening() {
   debug('Listening on ' + bind);
 
 
-  new Database().connect(CONNECTION_STRING);
+  new Database().connect({CONNECTION_STRING});
 }
