@@ -1,11 +1,18 @@
 var express = require('express');
 var router = express.Router();
 
-const config = require('../config');
+const fs = require('fs'); //file system operations
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' , config});
-});
+
+//variable def 
+let routes = fs.readdirSync(__dirname); //read all files in current directory (routes folder)
+
+
+//for each file in routes array, require and use it ->for of loop
+for(let route of routes){
+  if (route.includes(".js")&& route!=="index.js"){ 
+    router.use("/"+route.replace(".js",""), require("./"+route)); //"/auditlogs", require("./auditlogs.js")
+  } 
+};
 
 module.exports = router;
